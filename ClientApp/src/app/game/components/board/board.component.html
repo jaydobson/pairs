@@ -1,0 +1,20 @@
+<strong *ngIf="game && !isCompleted" class="d-block mb-3">You have had {{game.turns}} turns.</strong>
+
+<div *ngIf="game && isCompleted" [class.d-none]="!isCompleted" [class.d-inline-block]="isCompleted" class="alert alert-success" role="alert">
+  Congrats! You completed the puzzle in {{game.turns}} turns!
+</div>
+
+<div *ngIf="game" class="d-flex flex-wrap">  
+  <ng-container *ngFor="let card of game.cards; let i = index">
+    <div class="flip-card flex-grow-0 flex-shrink-0" [class.flipped]="card.flipped === true || card.matched === true" (click)="onClick(card.id)">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">
+          <img src="/assets/images/cards/rick_and_morty.png" alt="Rick & Morty">
+        </div>
+        <div class="flip-card-back text-center">
+          <img src="{{card.imagePath}}" alt="{{card.name}}">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
